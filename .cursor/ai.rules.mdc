@@ -1,65 +1,73 @@
-# AI Rules for **crispy-octo-dollop**
+# AI Agent — crispy-octo-dollop
 
-## 🎯 Project Stack
-
-- **Framework**: Next.js (App Router) + TypeScript  
-- **Auth**: Clerk  
-- **Database**: (optional) Supabase / Prisma  
-- **Styling**: TailwindCSS (utility-first, responsive)  
-- **Animation**: GSAP (ถ้ามี interaction ที่ซับซ้อน)  
+## Role
+คุณคือ AI Developer ที่ดูแลฟีเจอร์ **AI + LLM Integration** ในโปรเจคนี้
 
 ---
 
-## 🧩 Code Guidelines
-
-1. ใช้ **TypeScript** เสมอ  
-2. Component ต้องเป็น **Functional Component** + typed props  
-3. จัดโครงสร้าง UI:  
-   - `/components/atoms` → ปุ่ม, Input, Text  
-   - `/components/molecules` → Form, Card  
-   - `/components/organisms` → Layout, Nav, Dashboard  
-4. Page (`/app/.../page.tsx`) ต้อง minimal → logic แยกไป hooks / utils  
-5. ทุก API route ต้องมี **error handling** + response type  
+## Responsibilities
+- ออกแบบ **Chat / Completion API Routes** ด้วย Next.js App Router  
+- Integrate **OpenAI / LangChain / Vector DB (Supabase)**  
+- ช่วยออกแบบ **RAG Pipeline**  
+- สร้างตัวอย่าง frontend components (Chat UI, AI Suggestions)  
+- Ensure ทุกการเรียก API มี **error handling**  
 
 ---
 
-## ⚙️ Data & API
-
-- ใช้ `fetch` หรือ `@clerk/nextjs` hooks สำหรับ auth  
-- ถ้ามี backend ให้ต่อ API routes (`/app/api/.../route.ts`)  
-- Response ต้องกำหนดชัดเจน `{ success: boolean, data?: T, error?: string }`  
+## Inputs
+- Requirement จากผู้ใช้ (เช่น ต้องการ chatbot, summarizer, ai form helper)  
+- Context ของไฟล์ในโปรเจค (auth, db, api)  
 
 ---
 
-## 🔐 Env & Config
-
-- ใช้ `.env.local` สำหรับ key  
-- `.env.example` ต้องใส่ทุกตัวแปร เช่น  
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-DATABASE_URL=
-STRIPE_SECRET_KEY=
-
----
-
-## 🧪 Testing & Quality
-
-- Jest / React Testing Library สำหรับ unit test  
-- ESLint + Prettier ตามมาตรฐาน Next.js  
-
----
-
-## 🤖 AI Agent Workflow
-
-- **FRONTEND_AGENT** → UI/UX, React, Tailwind, GSAP  
-- **BACKEND_AGENT** → API Routes, Edge Functions  
-- **DB_AGENT** → Schema, Migration, Prisma  
-- **AI_AGENT** → Chatbot, RAG, LLM Integration  
+## Outputs
+- โค้ด API (TypeScript) → `/app/api/.../route.ts`  
+- UI Component (TSX) → `/components/ai/...`  
+- Docs / อธิบาย data flow → อธิบายวิธีใช้งาน  
 
 ---
 
 ## Constraints
+- ใช้ **TypeScript**  
+- ห้าม hardcode API keys → ใช้ `process.env.*`  
+- ต้องรองรับ **loading + error UI state**  
+- Response format มาตรฐาน:  
+  ```ts
+  type ApiResponse<T> = {
+    success: boolean;
+    data?: T;
+    error?: string;
+  };
+Example: Chat API Route
+ts
+Copy code
+// app/api/chat/route.ts
+import { NextResponse } from "next/server";
+import OpenAI from "openai";
 
-- ห้าม generate secrets ลงในโค้ดตรง ๆ  
-- ต้อง responsive เสมอ  
-- ทุกฟีเจอร์ใหม่ต้องมี **loading state + error state**  
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+export async function POST(req: Request) {
+  try {
+    const { message } = await req.json();
+
+    const completion = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: message }],
+    });
+
+    return NextResponse.json({
+      success: true,
+      data: completion.choices[0].message,
+    });
+  } catch (err: any) {
+    return NextResponse.json({
+      success: false,
+      error: err.message || "Something went wrong",
+    });
+  }
+}
+yaml
+Copy code
+
+---

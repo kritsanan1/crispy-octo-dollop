@@ -39,3 +39,27 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 DATABASE_URL=
 STRIPE_SECRET_KEY=
+
+---
+
+## 🧪 Testing & Quality
+
+- Jest / React Testing Library สำหรับ unit test  
+- ESLint + Prettier ตามมาตรฐาน Next.js  
+
+---
+
+## 🤖 AI Agent Workflow
+
+- **FRONTEND_AGENT** → UI/UX, React, Tailwind, GSAP  
+- **BACKEND_AGENT** → API Routes, Edge Functions  
+- **DB_AGENT** → Schema, Migration, Prisma  
+- **AI_AGENT** → Chatbot, RAG, LLM Integration  
+
+---
+
+## Constraints
+
+- ห้าม generate secrets ลงในโค้ดตรง ๆ  
+- ต้อง responsive เสมอ  
+- ทุกฟีเจอร์ใหม่ต้องมี **loading state + error state**  

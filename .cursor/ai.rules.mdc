@@ -1,0 +1,37 @@
+# AI Rules for **crispy-octo-dollop**
+
+## 🎯 Project Stack
+
+- **Framework**: Next.js (App Router) + TypeScript  
+- **Auth**: Clerk  
+- **Database**: (optional) Supabase / Prisma  
+- **Styling**: TailwindCSS (utility-first, responsive)  
+- **Animation**: GSAP (ถ้ามี interaction ที่ซับซ้อน)  
+
+---
+
+## 🧩 Code Guidelines
+
+1. ใช้ **TypeScript** เสมอ  
+2. Component ต้องเป็น **Functional Component** + typed props  
+3. จัดโครงสร้าง UI:  
+   - `/components/atoms` → ปุ่ม, Input, Text  
+   - `/components/molecules` → Form, Card  
+   - `/components/organisms` → Layout, Nav, Dashboard  
+4. Page (`/app/.../page.tsx`) ต้อง minimal → logic แยกไป hooks / utils  
+5. ทุก API route ต้องมี **error handling** + response type  
+
+---
+
+## ⚙️ Data & API
+
+- ใช้ `fetch` หรือ `@clerk/nextjs` hooks สำหรับ auth  
+- ถ้ามี backend ให้ต่อ API routes (`/app/api/.../route.ts`)  
+- Response ต้องกำหนดชัดเจน `{ success: boolean, data?: T, error?: string }`  
+
+---
+
+## 🔐 Env & Config
+
+- ใช้ `.env.local` สำหรับ key  
+- `.env.example` ต้องใส่ทุกตัวแปร เช่น  

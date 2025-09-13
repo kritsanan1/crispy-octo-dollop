@@ -35,3 +35,7 @@
 
 - ใช้ `.env.local` สำหรับ key  
 - `.env.example` ต้องใส่ทุกตัวแปร เช่น  
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+DATABASE_URL=
+STRIPE_SECRET_KEY=

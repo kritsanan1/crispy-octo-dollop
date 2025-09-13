@@ -1,8 +1,0 @@
-{
-  "servers": {
-    "social-media-api Docs": {
-      "type": "sse",
-      "url": "https://gitmcp.io/ayrshare/social-media-api"
-    }
-  }
-}

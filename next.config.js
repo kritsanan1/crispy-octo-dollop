@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    turbo: {}
-  },
+  // Configure Turbopack (stable in Next.js 15)
+  turbopack: {},
+  
   // Configure for Replit environment
   // Allow all hosts since Replit shows the app in an iframe proxy
   async headers() {
@@ -18,14 +18,14 @@ const nextConfig = {
       },
     ];
   },
+  
+  // Allow cross-origin requests for Replit environment
+  allowedDevOrigins: ['*.replit.dev', '*.repl.co'],
+  
   // Disable strict mode for development
   reactStrictMode: false,
   // Enable optimizations
   poweredByHeader: false,
-  // Configure for development server to accept all hosts
-  devIndicators: {
-    buildActivity: false,
-  },
 }
 
 module.exports = nextConfig
